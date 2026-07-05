@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap");
 
 :root {
   --primary-color: #6b21a8;
@@ -27,16 +27,22 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.125rem; /* ~18px base size */
+  font-family: "Inter", sans-serif;
+  font-size: 1rem; /* ~16px base size */
   background-color: var(--bg-color);
   color: var(--text-main);
   line-height: 1.6;
   padding-top: 90px; /* Space for the single clean header */
 }
 
-h1, h2, h3, .section-title h2, .hero-title, .hero-modern h1, .accordion-header h3 {
-  font-family: 'Playfair Display', serif;
+h1,
+h2,
+h3,
+.section-title h2,
+.hero-title,
+.hero-modern h1,
+.accordion-header h3 {
+  font-family: "Playfair Display", serif;
 }
 
 .container {
@@ -119,7 +125,7 @@ h1, h2, h3, .section-title h2, .hero-title, .hero-modern h1, .accordion-header h
   width: 100%;
   z-index: 1000;
   box-shadow: var(--shadow-sm);
-  background: url('/assets/images/bg_header3.png') center/cover no-repeat;
+  background: url("/assets/images/bg_header3.png") center/cover no-repeat;
   backdrop-filter: none;
   border-bottom: 2px solid var(--accent-color);
 }
@@ -179,7 +185,7 @@ h1, h2, h3, .section-title h2, .hero-title, .hero-modern h1, .accordion-header h
 }
 
 .navbar-container .nav-links a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -248,7 +254,7 @@ h1, h2, h3, .section-title h2, .hero-title, .hero-modern h1, .accordion-header h
 }
 
 .hero-title {
-  font-size: 3.8rem;
+  font-size: 3.2rem;
   font-weight: 800;
   color: #111;
   margin-bottom: 1rem;
@@ -547,7 +553,7 @@ h1, h2, h3, .section-title h2, .hero-title, .hero-modern h1, .accordion-header h
   body {
     padding-top: 80px;
   }
-  
+
   .navbar-inner {
     flex-wrap: wrap;
   }
@@ -579,14 +585,18 @@ h1, h2, h3, .section-title h2, .hero-title, .hero-modern h1, .accordion-header h
     left: -100%;
     width: 260px;
     height: calc(100vh - 80px);
-    background: var(--primary-dark);
+    background: white;
     flex-direction: column;
     padding: 2rem;
     gap: 1.5rem;
     box-shadow: var(--shadow-lg);
     transition: left 0.3s ease;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
     align-items: flex-start;
+  }
+
+  .navbar-container .nav-links a {
+    color: var(--text-main);
   }
 
   .navbar-container .nav-links.mobile-open {
@@ -594,14 +604,13 @@ h1, h2, h3, .section-title h2, .hero-title, .hero-modern h1, .accordion-header h
   }
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
-
 
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .footer-address {
     text-align: left;
     grid-column: span 2;
@@ -609,8 +618,14 @@ h1, h2, h3, .section-title h2, .hero-title, .hero-modern h1, .accordion-header h
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
   .hero-content-clean h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
   .split-layout {
     grid-template-columns: 1fr;
