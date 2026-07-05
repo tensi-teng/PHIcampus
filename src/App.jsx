@@ -66,6 +66,25 @@ const Navbar = () => {
 };
 
 const Hero = () => {
+  const slides = [
+    { src: "/assets/images/banner.png", caption: "Our Students" },
+    { src: "/assets/images/welcome.png", caption: "Welcome to PHICampus" },
+    { src: "/assets/images/club3.jpg", caption: "Extracurricular Activities" },
+    { src: "/assets/images/phil4.jpg", caption: "Learning Environment" },
+  ];
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const goTo = (i) => setCurrent(i);
+  const prev = () => setCurrent((c) => (c - 1 + slides.length) % slides.length);
+  const next = () => setCurrent((c) => (c + 1) % slides.length);
+
   return (
     <>
       <section className="hero-modern" id="home">
@@ -89,10 +108,14 @@ const Hero = () => {
                 International Campus
               </span>
             </h1>
-            <p className="hero-description" data-aos="fade-up" data-aos-delay="200">
-              At Port Harcourt International Campus, every child is nurtured to grow
-              in confidence, knowledge, and character, ready to thrive in a rapidly
-              changing world.
+            <p
+              className="hero-description"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              At Port Harcourt International Campus, every child is nurtured to
+              grow in confidence, knowledge, and character, ready to thrive in a
+              rapidly changing world.
             </p>
             <div
               style={{
@@ -109,27 +132,41 @@ const Hero = () => {
             </div>
           </div>
 
-          <div
-            className="hero-image-wrapper"
-            data-aos="zoom-in"
-            data-aos-delay="400"
-            style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/9', maxHeight: '550px' }}
-          >
-            <img
-              src="/assets/images/banner.png"
-              alt="Students"
-              className="hero-main-image"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-              }}
-            />
+          <div className="carousel" data-aos="zoom-in" data-aos-delay="400">
+            <div className="carousel-track">
+              {slides.map((slide, i) => (
+                <div
+                  key={i}
+                  className={`carousel-slide ${i === current ? "active" : ""}`}
+                >
+                  <img src={slide.src} alt={slide.caption} />
+                </div>
+              ))}
+            </div>
+            <button className="carousel-arrow carousel-prev" onClick={prev}>
+              &#10094;
+            </button>
+            <button className="carousel-arrow carousel-next" onClick={next}>
+              &#10095;
+            </button>
+            <div className="carousel-dots">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  className={`carousel-dot ${i === current ? "active" : ""}`}
+                  onClick={() => goTo(i)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="statistics-section" data-aos="fade-up" data-aos-delay="500">
+      <section
+        className="statistics-section"
+        data-aos="fade-up"
+        data-aos-delay="500"
+      >
         <div className="stat-item">
           <h2>600+</h2>
           <p>Students</p>
@@ -455,7 +492,11 @@ const Admission = () => (
 );
 
 const Clubs = () => (
-  <section className="section" id="clubs" style={{ background: "var(--bg-color)" }}>
+  <section
+    className="section"
+    id="clubs"
+    style={{ background: "var(--bg-color)" }}
+  >
     <div className="container">
       <div className="section-title" data-aos="fade-up">
         <h2>
@@ -612,6 +653,81 @@ const Footer = () => (
   </footer>
 );
 
+const Gallery = () => {
+  const photos = [
+    { src: "/assets/images/banner.png", alt: "Campus Life" },
+    { src: "/assets/images/welcome.png", alt: "Welcome" },
+    { src: "/assets/images/club.jpg", alt: "Sports" },
+    { src: "/assets/images/club2.jpg", alt: "Arts" },
+    { src: "/assets/images/club3.jpg", alt: "Activities" },
+    { src: "/assets/images/phil2.jpg", alt: "Learning" },
+    { src: "/assets/images/phil4.jpg", alt: "Classrooms" },
+  ];
+  const [lightbox, setLightbox] = useState(null);
+
+  return (
+    <section
+      className="section"
+      id="gallery"
+      style={{ background: "var(--bg-color)" }}
+    >
+      <div className="container">
+        <div className="section-title" data-aos="fade-up">
+          <p>Campus Life</p>
+          <h2>Photo Gallery</h2>
+        </div>
+        <div className="gallery-grid">
+          {photos.map((photo, i) => (
+            <div
+              key={i}
+              className="gallery-item"
+              data-aos="fade-up"
+              data-aos-delay={i * 80}
+              onClick={() => setLightbox(i)}
+            >
+              <img src={photo.src} alt={photo.alt} />
+              <div className="gallery-overlay">
+                <span>View</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {lightbox !== null && (
+        <div className="lightbox" onClick={() => setLightbox(null)}>
+          <button className="lightbox-close" onClick={() => setLightbox(null)}>
+            &times;
+          </button>
+          <button
+            className="lightbox-arrow lightbox-prev"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightbox((lightbox - 1 + photos.length) % photos.length);
+            }}
+          >
+            &#10094;
+          </button>
+          <img
+            src={photos[lightbox].src}
+            alt={photos[lightbox].alt}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            className="lightbox-arrow lightbox-next"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightbox((lightbox + 1) % photos.length);
+            }}
+          >
+            &#10095;
+          </button>
+        </div>
+      )}
+    </section>
+  );
+};
+
 function App() {
   useEffect(() => {
     AOS.init({
@@ -630,6 +746,7 @@ function App() {
       <Features />
       <Admission />
       <Clubs />
+      <Gallery />
       <Footer />
     </>
   );
