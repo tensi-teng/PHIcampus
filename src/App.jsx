@@ -65,46 +65,91 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => (
-  <section className="hero-modern" id="home">
-    <div className="container hero-modern-container">
-      <div className="hero-modern-text" data-aos="fade-up">
-        <h4
-          className="hero-subtitle"
-          style={{
-            color: "var(--accent-color)",
-            fontWeight: 700,
-            letterSpacing: "1px",
-          }}
-        >
-          Building Global Champions
-        </h4>
-        <h1 className="hero-title">
-          Port Harcourt{" "}
-          <span style={{ color: "var(--primary-color)" }}>International</span>{" "}
-          Campus
-        </h1>
-        <p className="hero-description">
-          At Port Harcourt International Campus, every child is nurtured to grow
-          in confidence, knowledge, and character, ready to thrive in a rapidly
-          changing world.
-        </p>
-      </div>
+const Hero = () => {
+  return (
+    <>
+      <section className="hero-modern" id="home">
+        <div className="container hero-modern-container">
+          <div className="hero-modern-text">
+            <h4
+              className="hero-subtitle"
+              style={{
+                color: "var(--text-main)",
+                fontWeight: 700,
+                letterSpacing: "1px",
+              }}
+              data-aos="fade-down"
+            >
+              Building Global Champions
+            </h4>
+            <h1 className="hero-title" data-aos="fade-up" data-aos-delay="100">
+              <span style={{ color: "var(--text-main)" }}>PORT HARCOURT</span>
+              <br />
+              <span style={{ color: "var(--primary-color)" }}>
+                International Campus
+              </span>
+            </h1>
+            <p className="hero-description" data-aos="fade-up" data-aos-delay="200">
+              At Port Harcourt International Campus, every child is nurtured to grow
+              in confidence, knowledge, and character, ready to thrive in a rapidly
+              changing world.
+            </p>
+            <div
+              style={{
+                marginTop: "2.5rem",
+                display: "flex",
+                gap: "1rem",
+                justifyContent: "center",
+              }}
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <button className="btn btn-primary">Apply Now</button>
+              <button className="btn btn-outline">Explore Our School</button>
+            </div>
+          </div>
 
-      <div
-        className="hero-image-wrapper"
-        data-aos="zoom-in"
-        data-aos-delay="200"
-      >
-        <img
-          src="/assets/images/banner.png"
-          alt="Students"
-          className="hero-main-image"
-        />
-      </div>
-    </div>
-  </section>
-);
+          <div
+            className="hero-image-wrapper"
+            data-aos="zoom-in"
+            data-aos-delay="400"
+            style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/9', maxHeight: '550px' }}
+          >
+            <img
+              src="/assets/images/banner.png"
+              alt="Students"
+              className="hero-main-image"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="statistics-section" data-aos="fade-up" data-aos-delay="500">
+        <div className="stat-item">
+          <h2>600+</h2>
+          <p>Students</p>
+        </div>
+        <div className="stat-item">
+          <h2>25+</h2>
+          <p>Years</p>
+        </div>
+        <div className="stat-item">
+          <h2>40+</h2>
+          <p>Teachers</p>
+        </div>
+        <div className="stat-item">
+          <h2>100%</h2>
+          <p>Child Focused</p>
+        </div>
+      </section>
+    </>
+  );
+};
 
 const AccordionItem = ({ title, content, isOpen, onClick }) => (
   <div className="accordion-item">
@@ -321,7 +366,7 @@ const Philosophy = () => (
 );
 
 const Features = () => (
-  <section className="section" style={{ background: "#faf5ff" }}>
+  <section className="section" style={{ background: "var(--bg-color)" }}>
     <div className="container">
       <div className="section-title" data-aos="fade-up">
         <h2>
@@ -410,7 +455,7 @@ const Admission = () => (
 );
 
 const Clubs = () => (
-  <section className="section" id="clubs" style={{ background: "#faf5ff" }}>
+  <section className="section" id="clubs" style={{ background: "var(--bg-color)" }}>
     <div className="container">
       <div className="section-title" data-aos="fade-up">
         <h2>
