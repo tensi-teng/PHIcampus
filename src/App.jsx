@@ -1,6 +1,6 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -108,14 +108,10 @@ const Hero = () => {
                 International Campus
               </span>
             </h1>
-            <p
-              className="hero-description"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              At Port Harcourt International Campus, every child is nurtured to
-              grow in confidence, knowledge, and character, ready to thrive in a
-              rapidly changing world.
+            <p className="hero-description" data-aos="fade-up" data-aos-delay="200">
+              At Port Harcourt International Campus, every child is nurtured to grow
+              in confidence, knowledge, and character, ready to thrive in a rapidly
+              changing world.
             </p>
             <div
               style={{
@@ -143,12 +139,6 @@ const Hero = () => {
                 </div>
               ))}
             </div>
-            <button className="carousel-arrow carousel-prev" onClick={prev}>
-              &#10094;
-            </button>
-            <button className="carousel-arrow carousel-next" onClick={next}>
-              &#10095;
-            </button>
             <div className="carousel-dots">
               {slides.map((_, i) => (
                 <button
@@ -162,11 +152,7 @@ const Hero = () => {
         </div>
       </section>
 
-      <section
-        className="statistics-section"
-        data-aos="fade-up"
-        data-aos-delay="500"
-      >
+      <section className="statistics-section" data-aos="fade-up" data-aos-delay="500">
         <div className="stat-item">
           <h2>600+</h2>
           <p>Students</p>
@@ -492,11 +478,7 @@ const Admission = () => (
 );
 
 const Clubs = () => (
-  <section
-    className="section"
-    id="clubs"
-    style={{ background: "var(--bg-color)" }}
-  >
+  <section className="section" id="clubs" style={{ background: "var(--bg-color)" }}>
     <div className="container">
       <div className="section-title" data-aos="fade-up">
         <h2>
@@ -663,40 +645,95 @@ const Gallery = () => {
     { src: "/assets/images/phil2.jpg", alt: "Learning" },
     { src: "/assets/images/phil4.jpg", alt: "Classrooms" },
   ];
+  const [showAll, setShowAll] = useState(false);
   const [lightbox, setLightbox] = useState(null);
+  const scrollRef = React.useRef(null);
+
+  const scrollBy = (dir) => {
+    if (scrollRef.current) {
+      const amount = scrollRef.current.offsetWidth * 0.7;
+      scrollRef.current.scrollBy({ left: dir * amount, behavior: "smooth" });
+    }
+  };
 
   return (
-    <section
-      className="section"
-      id="gallery"
-      style={{ background: "var(--bg-color)" }}
-    >
+    <section className="section" id="gallery" style={{ background: "var(--bg-color)" }}>
       <div className="container">
         <div className="section-title" data-aos="fade-up">
           <p>Campus Life</p>
           <h2>Photo Gallery</h2>
         </div>
-        <div className="gallery-grid">
-          {photos.map((photo, i) => (
-            <div
-              key={i}
-              className="gallery-item"
-              data-aos="fade-up"
-              data-aos-delay={i * 80}
-              onClick={() => setLightbox(i)}
-            >
-              <img src={photo.src} alt={photo.alt} />
-              <div className="gallery-overlay">
-                <span>View</span>
+
+        {!showAll ? (
+          <>
+            <div className="gallery-carousel-wrapper">
+              <button
+                className="gallery-nav gallery-nav-prev"
+                onClick={() => scrollBy(-1)}
+              >
+                &#10094;
+              </button>
+              <div className="gallery-carousel" ref={scrollRef}>
+                {photos.map((photo, i) => (
+                  <div
+                    key={i}
+                    className="gallery-carousel-item"
+                    onClick={() => setLightbox(i)}
+                  >
+                    <img src={photo.src} alt={photo.alt} />
+                  </div>
+                ))}
               </div>
+              <button
+                className="gallery-nav gallery-nav-next"
+                onClick={() => scrollBy(1)}
+              >
+                &#10095;
+              </button>
             </div>
-          ))}
-        </div>
+            <div style={{ textAlign: "center", marginTop: "2rem" }}>
+              <button
+                className="btn btn-outline"
+                onClick={() => setShowAll(true)}
+              >
+                View All Photos
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="gallery-grid">
+              {photos.map((photo, i) => (
+                <div
+                  key={i}
+                  className="gallery-item"
+                  onClick={() => setLightbox(i)}
+                >
+                  <img src={photo.src} alt={photo.alt} />
+                  <div className="gallery-overlay">
+                    <span>View</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: "center", marginTop: "2rem" }}>
+              <button
+                className="btn btn-outline"
+                onClick={() => setShowAll(false)}
+              >
+                Show Less
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       {lightbox !== null && (
         <div className="lightbox" onClick={() => setLightbox(null)}>
-          <button className="lightbox-close" onClick={() => setLightbox(null)}>
+          <button
+            className="lightbox-close"
+            onClick={() => setLightbox(null)}
+          >
             &times;
           </button>
           <button
